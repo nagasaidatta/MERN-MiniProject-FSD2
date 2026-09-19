@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { BuildingIcon, LockIcon, MenuIcon, CloseIcon } from './Icons';
 import '../styles/navbar.css';
 
 const Navbar = () => {
@@ -23,7 +24,9 @@ const Navbar = () => {
       <div className="container navbar-inner">
         {/* Brand Logo */}
         <Link to="/" className="brand-link" onClick={closeMenu}>
-          <div className="brand-emblem">🏛️</div>
+          <div className="brand-emblem">
+            <BuildingIcon size={20} color="#ffffff" />
+          </div>
           <div>
             <span className="brand-text-title">GovBeneficiary Portal</span>
             <span className="brand-text-sub">Ministry of Public Welfare</span>
@@ -36,7 +39,7 @@ const Navbar = () => {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle navigation menu"
         >
-          {mobileMenuOpen ? '✕' : '☰'}
+          {mobileMenuOpen ? <CloseIcon size={20} /> : <MenuIcon size={20} />}
         </button>
 
         {/* Navigation Menu */}
@@ -62,7 +65,8 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink to="/admin-login" className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`} onClick={closeMenu}>
-                    🔒 Admin Portal
+                    <LockIcon size={13} style={{ verticalAlign: '-1px', marginRight: '4px' }} />
+                    Admin Portal
                   </NavLink>
                 </li>
                 <li>

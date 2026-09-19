@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import StatusBadge from '../components/StatusBadge';
 import LoadingSpinner from '../components/LoadingSpinner';
 import NotificationBanner from '../components/NotificationBanner';
+import { CheckCircleIcon } from '../components/Icons';
 
 const ApplyScheme = () => {
   const { schemeId } = useParams();
@@ -86,8 +87,18 @@ const ApplyScheme = () => {
       {/* Success View after submission */}
       {submittedApp ? (
         <div className="card" style={{ borderTop: '4px solid var(--color-success)', textAlign: 'center', padding: '2.5rem 1.5rem' }}>
-          <div style={{ fontSize: '3rem', color: 'var(--color-success)', marginBottom: '0.75rem' }}>
-            🎉
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '64px',
+            height: '64px',
+            borderRadius: '50%',
+            backgroundColor: '#ecfdf5',
+            color: 'var(--color-success)',
+            marginBottom: '1rem'
+          }}>
+            <CheckCircleIcon size={36} color="var(--color-success)" />
           </div>
           <h2 style={{ color: 'var(--color-success-text)', marginBottom: '0.5rem' }}>
             Application Submitted Successfully

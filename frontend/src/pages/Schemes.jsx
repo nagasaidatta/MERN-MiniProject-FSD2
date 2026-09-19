@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import SchemeCard from '../components/SchemeCard';
 import LoadingSpinner from '../components/LoadingSpinner';
 import NotificationBanner from '../components/NotificationBanner';
+import { SearchIcon } from '../components/Icons';
 import '../styles/schemes.css';
 
 const CATEGORIES = [
@@ -150,10 +151,12 @@ const Schemes = () => {
         <LoadingSpinner text="Querying schemes database..." />
       ) : schemes.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">🔍</div>
+          <div className="empty-state-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <SearchIcon size={40} color="var(--color-text-muted)" />
+          </div>
           <h3 className="empty-state-title">No Government Schemes Found</h3>
           <p className="empty-state-text">
-            No active schemes matched your current filter criteria. Try adjusting your search term or category filter.
+            No active schemes matched your search criteria. Try adjusting your keyword or category filter.
           </p>
           <button
             onClick={() => {

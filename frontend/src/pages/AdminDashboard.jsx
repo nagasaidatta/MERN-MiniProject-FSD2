@@ -8,6 +8,16 @@ import StatusBadge from '../components/StatusBadge';
 import LoadingSpinner from '../components/LoadingSpinner';
 import NotificationBanner from '../components/NotificationBanner';
 import Modal from '../components/Modal';
+import {
+  UsersIcon,
+  BuildingIcon,
+  FileTextIcon,
+  CheckCircleIcon,
+  ClockIcon,
+  XCircleIcon,
+  BarChartIcon,
+  PlusIcon
+} from '../components/Icons';
 import '../styles/dashboard.css';
 
 const AdminDashboard = () => {
@@ -108,11 +118,11 @@ const AdminDashboard = () => {
           </p>
         </div>
         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-          <Link to="/admin/schemes" className="btn btn-white">
-            + Create New Scheme
+          <Link to="/admin/schemes" className="btn btn-white" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+            <PlusIcon size={16} /> Create New Scheme
           </Link>
-          <Link to="/admin/reports" className="btn btn-outline-light">
-            📊 View Aggregated Reports
+          <Link to="/admin/reports" className="btn btn-outline-light" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+            <BarChartIcon size={16} /> View Reports
           </Link>
         </div>
       </div>
@@ -133,42 +143,42 @@ const AdminDashboard = () => {
           title="Total Citizens"
           value={summary?.totalCitizens || 0}
           caption="Registered citizens"
-          icon="👥"
+          icon={<UsersIcon size={20} />}
           color="blue"
         />
         <DashboardCard
           title="Total Schemes"
           value={summary?.totalSchemes || 0}
           caption="Active welfare programs"
-          icon="🏛️"
+          icon={<BuildingIcon size={20} />}
           color="blue"
         />
         <DashboardCard
           title="Total Applications"
           value={summary?.totalApplications || 0}
           caption="Submitted claims"
-          icon="📋"
+          icon={<FileTextIcon size={20} />}
           color="blue"
         />
         <DashboardCard
           title="Approved Benefits"
           value={summary?.statusCounts?.Approved || 0}
           caption="Sanctioned beneficiaries"
-          icon="✅"
+          icon={<CheckCircleIcon size={20} />}
           color="green"
         />
         <DashboardCard
           title="Pending Applications"
           value={summary?.statusCounts?.Pending || 0}
           caption="Awaiting departmental review"
-          icon="⏳"
+          icon={<ClockIcon size={20} />}
           color="amber"
         />
         <DashboardCard
           title="Rejected Applications"
           value={summary?.statusCounts?.Rejected || 0}
           caption="Ineligible submissions"
-          icon="❌"
+          icon={<XCircleIcon size={20} />}
           color="red"
         />
       </div>
@@ -189,7 +199,9 @@ const AdminDashboard = () => {
 
         {recentApplications.length === 0 ? (
           <div className="empty-state">
-            <div className="empty-state-icon">📄</div>
+            <div className="empty-state-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <FileTextIcon size={40} color="var(--color-text-muted)" />
+            </div>
             <h4 className="empty-state-title">No Applications Found</h4>
             <p className="empty-state-text">No citizen applications have been received yet.</p>
           </div>

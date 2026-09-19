@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import SchemeCard from '../components/SchemeCard';
 import LoadingSpinner from '../components/LoadingSpinner';
 import NotificationBanner from '../components/NotificationBanner';
+import { ShieldIcon, BuildingIcon } from '../components/Icons';
 import '../styles/home.css';
 import '../styles/schemes.css';
 
@@ -67,7 +68,10 @@ const Home = () => {
       <section className="hero-section">
         <div className="container hero-content">
           <div className="hero-pill">
-            <span>🛡️ National Citizen Welfare Gateway</span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+              <ShieldIcon size={15} color="var(--color-accent)" />
+              National Citizen Welfare Gateway
+            </span>
           </div>
           <h1 className="hero-title">
             Access Government Schemes, <span>Simply.</span>
@@ -202,11 +206,13 @@ const Home = () => {
       {/* Trust & Transparency Section */}
       <section className="container trust-section">
         <div className="trust-box">
-          <div className="trust-icon">🏛️</div>
+          <div className="trust-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <BuildingIcon size={32} color="var(--color-primary)" />
+          </div>
           <div>
             <h3 className="trust-title">Centralized & Accountable Public Service Delivery</h3>
             <p className="trust-text">
-              The Government Scheme Beneficiary Portal eliminates bureaucratic delays by offering a unified digital interface. Every application is cryptographically tracked via unique tracking IDs, ensuring administrative accountability, zero unauthorized intermediaries, and expedited benefit disbursement.
+              The Government Scheme Beneficiary Portal provides direct access to state and central welfare initiatives. Every application is tracked via unique tracking IDs, ensuring administrative accountability, zero unauthorized intermediaries, and expedited benefit disbursement.
             </p>
           </div>
         </div>

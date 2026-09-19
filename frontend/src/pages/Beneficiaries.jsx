@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { applicationService } from '../services/applicationService';
 import LoadingSpinner from '../components/LoadingSpinner';
 import NotificationBanner from '../components/NotificationBanner';
+import { UsersIcon } from '../components/Icons';
 
 const Beneficiaries = () => {
   const [beneficiaries, setBeneficiaries] = useState([]);
@@ -77,7 +78,9 @@ const Beneficiaries = () => {
         <LoadingSpinner text="Retrieving verified beneficiary register..." />
       ) : filteredBeneficiaries.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">👥</div>
+          <div className="empty-state-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <UsersIcon size={40} color="var(--color-text-muted)" />
+          </div>
           <h3 className="empty-state-title">No Beneficiary Records</h3>
           <p className="empty-state-text">
             No approved citizen beneficiaries match the current criteria.

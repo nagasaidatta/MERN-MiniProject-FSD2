@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import StatusBadge from '../components/StatusBadge';
 import LoadingSpinner from '../components/LoadingSpinner';
 import NotificationBanner from '../components/NotificationBanner';
+import { FileTextIcon, InfoIcon, AlertTriangleIcon } from '../components/Icons';
 import '../styles/schemes.css';
 
 const SchemeDetails = () => {
@@ -132,8 +133,9 @@ const SchemeDetails = () => {
 
           {/* Detailed Eligibility Section */}
           <div className="details-block">
-            <h3 className="details-block-title">
-              <span>📋</span> Eligibility Criteria & Requirements
+            <h3 className="details-block-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <FileTextIcon size={18} color="var(--color-primary)" />
+              Eligibility Criteria & Requirements
             </h3>
             <div className="details-block-content" style={{ background: '#f8fafc', padding: '1.25rem', borderRadius: 'var(--radius-md)', borderLeft: '3px solid var(--color-accent)' }}>
               {scheme.eligibility}
@@ -142,11 +144,12 @@ const SchemeDetails = () => {
 
           {/* Application Guidance */}
           <div className="details-block">
-            <h3 className="details-block-title">
-              <span>ℹ️</span> Submission Instructions
+            <h3 className="details-block-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <InfoIcon size={18} color="var(--color-primary)" />
+              Submission Instructions
             </h3>
             <p className="details-block-content">
-              Applicants must ensure their personal identification and banking details match official government records. Once submitted, your application will receive a unique Application Tracking ID and will be reviewed by the respective nodal welfare officer.
+              Applicants must ensure personal identification and banking details match official government records. Once submitted, your application receives a unique Application Tracking ID and will be reviewed by the respective nodal welfare officer.
             </p>
           </div>
 
@@ -158,8 +161,8 @@ const SchemeDetails = () => {
 
             <div>
               {!isActive && (
-                <span style={{ color: 'var(--color-danger)', fontSize: 'var(--font-size-sm)', marginRight: '1rem', fontWeight: 500 }}>
-                  ⚠️ This scheme is currently closed for new applications.
+                <span style={{ color: 'var(--color-danger)', fontSize: 'var(--font-size-sm)', marginRight: '1rem', fontWeight: 500, display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <AlertTriangleIcon size={16} color="var(--color-danger)" /> This scheme is closed for new applications.
                 </span>
               )}
               <button

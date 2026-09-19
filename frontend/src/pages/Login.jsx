@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import NotificationBanner from '../components/NotificationBanner';
+import { BuildingIcon, UserIcon, FileTextIcon, ShieldIcon } from '../components/Icons';
 
 const Login = ({ initialMode }) => {
   const location = useLocation();
@@ -113,22 +114,36 @@ const Login = ({ initialMode }) => {
       <div className="card">
         {/* Card Header */}
         <div className="card-header" style={{ textAlign: 'center', backgroundColor: '#fafbfd', paddingBottom: '1rem' }}>
-          <div style={{ fontSize: '2rem', marginBottom: '0.35rem' }}>🏛️</div>
-          <span style={{
-            display: 'inline-block',
-            backgroundColor: '#ecfdf5',
-            color: '#065f46',
-            border: '1px solid #a7f3d0',
-            fontSize: '0.68rem',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            padding: '0.2rem 0.6rem',
-            borderRadius: 'var(--radius-full)',
-            marginBottom: '0.5rem'
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '48px',
+            height: '48px',
+            borderRadius: '50%',
+            backgroundColor: '#f1f5f9',
+            marginBottom: '0.5rem',
+            color: 'var(--color-primary)'
           }}>
-            Citizen Welfare Portal
-          </span>
+            <BuildingIcon size={24} color="var(--color-primary)" />
+          </div>
+          <div>
+            <span style={{
+              display: 'inline-block',
+              backgroundColor: '#ecfdf5',
+              color: '#065f46',
+              border: '1px solid #a7f3d0',
+              fontSize: '0.68rem',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              padding: '0.2rem 0.6rem',
+              borderRadius: 'var(--radius-full)',
+              marginBottom: '0.5rem'
+            }}>
+              Citizen Welfare Portal
+            </span>
+          </div>
           <h2 style={{ fontSize: '1.45rem', marginBottom: '0.25rem', color: 'var(--color-primary)' }}>
             Citizen Portal Access
           </h2>
@@ -158,10 +173,14 @@ const Login = ({ initialMode }) => {
               fontWeight: 700,
               fontSize: 'var(--font-size-sm)',
               cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.4rem',
               transition: 'all 0.15s ease'
             }}
           >
-            🔑 Citizen Login
+            <UserIcon size={16} /> Citizen Login
           </button>
           <button
             type="button"
@@ -175,10 +194,14 @@ const Login = ({ initialMode }) => {
               fontWeight: 700,
               fontSize: 'var(--font-size-sm)',
               cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.4rem',
               transition: 'all 0.15s ease'
             }}
           >
-            📝 Register Account
+            <FileTextIcon size={16} /> Register Account
           </button>
         </div>
 
@@ -326,8 +349,19 @@ const Login = ({ initialMode }) => {
                 )}
               </div>
 
-              <div style={{ backgroundColor: '#f1f5f9', padding: '0.75rem', borderRadius: 'var(--radius-md)', marginBottom: '1.25rem', fontSize: 'var(--font-size-xs)', color: 'var(--color-text-secondary)' }}>
-                🔒 All registrations are automatically assigned the verified <strong>Citizen</strong> role.
+              <div style={{
+                backgroundColor: '#f1f5f9',
+                padding: '0.75rem',
+                borderRadius: 'var(--radius-md)',
+                marginBottom: '1.25rem',
+                fontSize: 'var(--font-size-xs)',
+                color: 'var(--color-text-secondary)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem'
+              }}>
+                <ShieldIcon size={14} color="var(--color-primary)" />
+                <span>All registrations are assigned verified <strong>Citizen</strong> role.</span>
               </div>
 
               <button

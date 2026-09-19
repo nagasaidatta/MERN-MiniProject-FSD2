@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { BuildingIcon } from './Icons';
 import '../styles/footer.css';
 
 const Footer = () => {
@@ -9,9 +10,12 @@ const Footer = () => {
         <div className="footer-grid">
           {/* Brand Column */}
           <div className="footer-brand">
-            <h4>🏛️ Government Scheme Beneficiary Portal</h4>
+            <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <BuildingIcon size={20} color="#ffffff" />
+              Government Scheme Beneficiary Portal
+            </h4>
             <p className="footer-desc">
-              An integrated digital public-service portal empowering citizens to discover eligible welfare schemes, apply online seamlessly, and monitor real-time application statuses with complete transparency.
+              Centralized digital public infrastructure empowering citizens to discover eligible welfare schemes, submit applications online, and track status with transparency.
             </p>
           </div>
 
@@ -55,7 +59,7 @@ const Footer = () => {
         <div className="footer-bottom">
           <p>© {new Date().getFullYear()} Government Scheme Beneficiary Portal. All Rights Reserved.</p>
           <p className="footer-disclaimer">
-            Demonstration MERN Stack Project. Designed for transparency, accessibility, and public benefit.
+            National E-Governance Public Service Platform. Designed for transparency, accessibility, and citizen welfare.
           </p>
         </div>
       </div>

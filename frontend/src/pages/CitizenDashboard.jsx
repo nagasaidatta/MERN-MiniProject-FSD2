@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 import { applicationService } from '../services/applicationService';
+import { useAuth } from '../context/AuthContext';
 import DashboardCard from '../components/DashboardCard';
 import StatusBadge from '../components/StatusBadge';
 import LoadingSpinner from '../components/LoadingSpinner';
 import NotificationBanner from '../components/NotificationBanner';
 import Modal from '../components/Modal';
+import { FileTextIcon, ClockIcon, CheckCircleIcon, XCircleIcon, AlertTriangleIcon } from '../components/Icons';
 import '../styles/dashboard.css';
 
 const CitizenDashboard = () => {
@@ -99,28 +100,28 @@ const CitizenDashboard = () => {
           title="Total Applications"
           value={totalApps}
           caption="All submitted requests"
-          icon="📋"
+          icon={<FileTextIcon size={20} />}
           color="blue"
         />
         <DashboardCard
           title="Pending Verification"
           value={pendingApps}
           caption="Under department review"
-          icon="⏳"
+          icon={<ClockIcon size={20} />}
           color="amber"
         />
         <DashboardCard
           title="Approved Benefits"
           value={approvedApps}
           caption="Sanctioned welfare grants"
-          icon="✅"
+          icon={<CheckCircleIcon size={20} />}
           color="green"
         />
         <DashboardCard
           title="Rejected / Ineligible"
           value={rejectedApps}
           caption="Did not meet guidelines"
-          icon="❌"
+          icon={<XCircleIcon size={20} />}
           color="red"
         />
       </div>
@@ -143,7 +144,9 @@ const CitizenDashboard = () => {
           <LoadingSpinner text="Retrieving your submitted applications..." />
         ) : applications.length === 0 ? (
           <div className="empty-state">
-            <div className="empty-state-icon">📄</div>
+            <div className="empty-state-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <FileTextIcon size={40} color="var(--color-text-muted)" />
+            </div>
             <h4 className="empty-state-title">No Applications Found</h4>
             <p className="empty-state-text">
               You have not applied for any government schemes yet. Explore available welfare schemes to apply today.
@@ -251,9 +254,21 @@ const CitizenDashboard = () => {
           <strong>{cancelModalApp?.scheme?.schemeName || cancelModalApp?.schemeId}</strong>{' '}
           (Application ID: <code>{cancelModalApp?.applicationId}</code>)?
         </p>
-        <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginTop: '0.5rem' }}>
-          ⚠️ This action cannot be undone. You will need to submit a new application if you wish to apply again.
-        </p>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.4rem',
+          fontSize: 'var(--font-size-xs)',
+          color: 'var(--color-text-muted)',
+          marginTop: '0.75rem',
+          padding: '0.5rem 0.75rem',
+          backgroundColor: '#fffbeb',
+          border: '1px solid #fef3c7',
+          borderRadius: 'var(--radius-sm)'
+        }}>
+          <AlertTriangleIcon size={16} color="var(--color-warning)" />
+          <span>This action cannot be undone. A new application will be required if you reapply.</span>
+        </div>
       </Modal>
     </div>
   );

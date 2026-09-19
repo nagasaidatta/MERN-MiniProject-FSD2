@@ -3,6 +3,7 @@ import { reportService } from '../services/reportService';
 import DashboardCard from '../components/DashboardCard';
 import LoadingSpinner from '../components/LoadingSpinner';
 import NotificationBanner from '../components/NotificationBanner';
+import { BarChartIcon, TrendingUpIcon, ClockIcon, XCircleIcon, RefreshIcon } from '../components/Icons';
 import '../styles/reports.css';
 
 const Reports = () => {
@@ -66,11 +67,11 @@ const Reports = () => {
         <div>
           <h1 className="page-title">Welfare Analytics & Governance Reports</h1>
           <p className="page-subtitle">
-            MongoDB aggregation-driven analytics evaluating scheme disbursement, approval velocity, and demographic distribution.
+            Live telemetry evaluating welfare scheme disbursement, verification velocity, and beneficiary distribution.
           </p>
         </div>
-        <button onClick={fetchReportData} className="btn btn-outline btn-sm">
-          🔄 Refresh Aggregations
+        <button onClick={fetchReportData} className="btn btn-outline btn-sm" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+          <RefreshIcon size={14} /> Refresh Data
         </button>
       </div>
 
@@ -82,28 +83,28 @@ const Reports = () => {
           title="Total Claims Received"
           value={totalApps}
           caption="Aggregated across all programs"
-          icon="📊"
+          icon={<BarChartIcon size={20} />}
           color="blue"
         />
         <DashboardCard
           title="Approval Rate"
           value={`${approvedPct}%`}
           caption={`${approved} granted sanctions`}
-          icon="📈"
+          icon={<TrendingUpIcon size={20} />}
           color="green"
         />
         <DashboardCard
           title="Pending Adjudication"
           value={pending}
           caption={`${pendingPct}% of total volume`}
-          icon="⏳"
+          icon={<ClockIcon size={20} />}
           color="amber"
         />
         <DashboardCard
           title="Rejection / Ineligible"
           value={rejected}
           caption={`${rejectedPct}% of total volume`}
-          icon="🛡️"
+          icon={<XCircleIcon size={20} />}
           color="red"
         />
       </div>

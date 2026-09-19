@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import NotificationBanner from '../components/NotificationBanner';
+import { BuildingIcon, LockIcon } from '../components/Icons';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -42,22 +43,38 @@ const AdminLogin = () => {
       {/* Official Security Header */}
       <div className="card" style={{ borderTop: '4px solid #ef4444' }}>
         <div className="card-header" style={{ textAlign: 'center', backgroundColor: '#0a192f', color: '#ffffff', padding: '2rem 1.5rem' }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>🏛️</div>
-          <span style={{
-            display: 'inline-block',
-            backgroundColor: 'rgba(239, 68, 68, 0.2)',
-            color: '#fca5a5',
-            border: '1px solid rgba(239, 68, 68, 0.4)',
-            fontSize: '0.68rem',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            padding: '0.2rem 0.6rem',
-            borderRadius: 'var(--radius-full)',
-            marginBottom: '0.75rem'
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '56px',
+            height: '56px',
+            borderRadius: '50%',
+            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+            marginBottom: '0.75rem',
+            border: '1px solid rgba(255, 255, 255, 0.15)'
           }}>
-            🔒 Official Government Use Only
-          </span>
+            <BuildingIcon size={28} color="#ffffff" />
+          </div>
+          <div>
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              backgroundColor: 'rgba(239, 68, 68, 0.2)',
+              color: '#fca5a5',
+              border: '1px solid rgba(239, 68, 68, 0.4)',
+              fontSize: '0.68rem',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              padding: '0.2rem 0.6rem',
+              borderRadius: 'var(--radius-full)',
+              marginBottom: '0.75rem'
+            }}>
+              <LockIcon size={12} color="#fca5a5" /> Official Government Access
+            </span>
+          </div>
           <h2 style={{ fontSize: '1.5rem', marginBottom: '0.35rem', color: '#ffffff' }}>
             Administrative Portal
           </h2>

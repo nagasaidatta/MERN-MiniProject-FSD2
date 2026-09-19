@@ -4,6 +4,7 @@ import StatusBadge from '../components/StatusBadge';
 import LoadingSpinner from '../components/LoadingSpinner';
 import NotificationBanner from '../components/NotificationBanner';
 import Modal from '../components/Modal';
+import { FileTextIcon } from '../components/Icons';
 
 const AdminApplications = () => {
   const [applications, setApplications] = useState([]);
@@ -142,7 +143,9 @@ const AdminApplications = () => {
         <LoadingSpinner text="Retrieving applications..." />
       ) : applications.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">📋</div>
+          <div className="empty-state-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <FileTextIcon size={40} color="var(--color-text-muted)" />
+          </div>
           <h3 className="empty-state-title">No Applications Found</h3>
           <p className="empty-state-text">
             No applications matched the specified status or search criteria.

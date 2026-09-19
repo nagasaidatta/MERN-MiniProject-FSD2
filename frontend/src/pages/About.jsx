@@ -15,7 +15,7 @@ const About = () => {
         <div className="card-body">
           <h3 style={{ color: 'var(--color-primary)', marginBottom: '1rem' }}>Our Mission</h3>
           <p>
-            The <strong>Government Scheme Beneficiary Portal</strong> is a unified, transparent e-governance platform designed to bridge the gap between welfare policies and citizen beneficiaries. Built on modern, open-standards MERN architecture, the portal streamlines scheme discovery, eligibility assessment, direct application submission, and objective application adjudication.
+            The <strong>Government Scheme Beneficiary Portal</strong> is a unified, transparent e-governance platform designed to connect citizens directly with public welfare initiatives. Built as digital public infrastructure, the portal streamlines scheme discovery, eligibility assessment, online application submission, and transparent departmental verification.
           </p>
 
           <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '1.5rem 0' }} />

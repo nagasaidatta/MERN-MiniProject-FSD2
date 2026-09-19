@@ -4,6 +4,7 @@ import StatusBadge from '../components/StatusBadge';
 import LoadingSpinner from '../components/LoadingSpinner';
 import NotificationBanner from '../components/NotificationBanner';
 import Modal from '../components/Modal';
+import { BuildingIcon, AlertTriangleIcon, PlusIcon } from '../components/Icons';
 
 const CATEGORIES = [
   'Students',
@@ -142,8 +143,8 @@ const ManageSchemes = () => {
           <h1 className="page-title">Manage Government Schemes</h1>
           <p className="page-subtitle">Add, update, or decommission public welfare programs</p>
         </div>
-        <button onClick={openAddModal} className="btn btn-primary">
-          + Add New Scheme
+        <button onClick={openAddModal} className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+          <PlusIcon size={16} /> Add New Scheme
         </button>
       </div>
 
@@ -167,13 +168,15 @@ const ManageSchemes = () => {
         <LoadingSpinner text="Retrieving schemes inventory..." />
       ) : schemes.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">🏛️</div>
+          <div className="empty-state-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <BuildingIcon size={40} color="var(--color-text-muted)" />
+          </div>
           <h3 className="empty-state-title">No Schemes in Registry</h3>
           <p className="empty-state-text">
-            Start by adding the first government welfare scheme to the central portal.
+            Add the first government welfare scheme to the central portal registry.
           </p>
-          <button onClick={openAddModal} className="btn btn-primary">
-            + Add Scheme Now
+          <button onClick={openAddModal} className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+            <PlusIcon size={16} /> Add Scheme Now
           </button>
         </div>
       ) : (
@@ -403,9 +406,21 @@ const ManageSchemes = () => {
           Are you sure you want to permanently delete scheme{' '}
           <strong>{deleteModalScheme?.schemeName}</strong> (<code>{deleteModalScheme?.schemeId}</code>)?
         </p>
-        <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-danger)', marginTop: '0.5rem' }}>
-          ⚠️ This will remove the scheme from citizen listings. Existing applications referencing this scheme ID will remain archived.
-        </p>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.4rem',
+          fontSize: 'var(--font-size-xs)',
+          color: 'var(--color-danger)',
+          marginTop: '0.75rem',
+          padding: '0.5rem 0.75rem',
+          backgroundColor: '#fef2f2',
+          border: '1px solid #fee2e2',
+          borderRadius: 'var(--radius-sm)'
+        }}>
+          <AlertTriangleIcon size={16} color="var(--color-danger)" />
+          <span>This will remove the scheme from citizen listings. Existing applications referencing this scheme will remain archived.</span>
+        </div>
       </Modal>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { CloseIcon } from './Icons';
 
 const Modal = ({
   isOpen,
@@ -47,8 +48,9 @@ const Modal = ({
             onClick={onClose}
             disabled={isLoading}
             aria-label="Close dialog"
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
-            ✕
+            <CloseIcon size={18} />
           </button>
         </div>
 

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { authService } from '../services/authService';
 import NotificationBanner from '../components/NotificationBanner';
+import { BuildingIcon, ShieldIcon } from '../components/Icons';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -72,8 +74,20 @@ const Register = () => {
   return (
     <div className="container page-wrapper" style={{ maxWidth: '520px' }}>
       <div className="card">
-        <div className="card-header" style={{ textAlign: 'center', backgroundColor: '#fafbfd' }}>
-          <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🏛️</div>
+        <div className="card-header" style={{ textAlign: 'center', backgroundColor: '#fafbfd', paddingBottom: '1rem' }}>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '48px',
+            height: '48px',
+            borderRadius: '50%',
+            backgroundColor: '#f1f5f9',
+            marginBottom: '0.5rem',
+            color: 'var(--color-primary)'
+          }}>
+            <BuildingIcon size={24} color="var(--color-primary)" />
+          </div>
           <h2 style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>Citizen Registration</h2>
           <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)', margin: 0 }}>
             Create an official beneficiary account to access government welfare schemes.
@@ -165,8 +179,19 @@ const Register = () => {
             </div>
 
             {/* Notice regarding default role */}
-            <div style={{ backgroundColor: '#f1f5f9', padding: '0.75rem', borderRadius: 'var(--radius-md)', marginBottom: '1.25rem', fontSize: 'var(--font-size-xs)', color: 'var(--color-text-secondary)' }}>
-              🔒 <strong>Official Role Policy:</strong> All public registrations are automatically provisioned with the verified <strong>Citizen</strong> role. Administrative accounts are created exclusively through authorized internal channels.
+            <div style={{
+              backgroundColor: '#f1f5f9',
+              padding: '0.75rem',
+              borderRadius: 'var(--radius-md)',
+              marginBottom: '1.25rem',
+              fontSize: 'var(--font-size-xs)',
+              color: 'var(--color-text-secondary)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.4rem'
+            }}>
+              <ShieldIcon size={14} color="var(--color-primary)" />
+              <span><strong>Official Role Policy:</strong> Public registrations are provisioned with the verified <strong>Citizen</strong> role.</span>
             </div>
 
             <button

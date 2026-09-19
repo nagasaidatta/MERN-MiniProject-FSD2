@@ -83,18 +83,23 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5001;
 
-const server = app.listen(PORT, () => {
-  console.log(`🚀 Government Scheme Portal Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-  console.log(`🌐 Base URL: http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  const server = app.listen(PORT, () => {
+    console.log(`🚀 Government Scheme Portal Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
+    console.log(`🌐 Base URL: http://localhost:${PORT}`);
+  });
 
-server.on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.error(`❌ Port ${PORT} is already in use by another application.`);
-    console.error(`💡 Tip: On macOS, port 5000 is often occupied by AirPlay Receiver. Port ${PORT} can be changed in backend/.env`);
-    process.exit(1);
-  } else {
-    console.error('❌ Server startup error:', err);
-  }
-});
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`❌ Port ${PORT} is already in use by another application.`);
+      console.error(`💡 Tip: On macOS, port 5000 is often occupied by AirPlay Receiver. Port ${PORT} can be changed in backend/.env`);
+      process.exit(1);
+    } else {
+      console.error('❌ Server startup error:', err);
+    }
+  });
+}
+
+module.exports = app;
+
 
