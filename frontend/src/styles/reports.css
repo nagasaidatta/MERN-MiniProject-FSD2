@@ -1,0 +1,127 @@
+/* Reports & Visual Analytics (Pure CSS - No external chart libraries) */
+.reports-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 900px) {
+  .reports-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.report-panel {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.report-panel-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Distribution Multi-Segment Bar */
+.distribution-bar {
+  display: flex;
+  height: 24px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  background-color: var(--color-border);
+}
+
+.segment-approved {
+  background-color: var(--color-success);
+  transition: width 0.5s ease;
+}
+
+.segment-pending {
+  background-color: var(--color-warning);
+  transition: width 0.5s ease;
+}
+
+.segment-rejected {
+  background-color: var(--color-danger);
+  transition: width 0.5s ease;
+}
+
+.distribution-legend {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+/* CSS Horizontal Bar Chart */
+.css-chart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.css-chart-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.chart-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.chart-bar-track {
+  width: 100%;
+  height: 12px;
+  background-color: #f1f5f9;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.chart-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #1d4ed8, #3b82f6);
+  border-radius: var(--radius-full);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chart-bar-fill.success {
+  background: linear-gradient(90deg, #059669, #10b981);
+}
+
+.chart-bar-fill.warning {
+  background: linear-gradient(90deg, #d97706, #f59e0b);
+}
+
+.chart-bar-fill.danger {
+  background: linear-gradient(90deg, #dc2626, #ef4444);
+}

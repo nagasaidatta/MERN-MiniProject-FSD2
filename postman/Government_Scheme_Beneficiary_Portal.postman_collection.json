@@ -1,0 +1,372 @@
+{
+  "info": {
+    "_postman_id": "8b51829e-4d91-49b8-bdf4-f58ef0f04f21",
+    "name": "Government Scheme Beneficiary Portal API",
+    "description": "Complete Postman Test Suite for Government Scheme Beneficiary Portal MERN Mini Project. Covers Authentication, Scheme Management, Citizen Applications, Beneficiary Records, and Aggregated Reports.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "POST /register (Citizen Registration)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Suresh Patel\",\n  \"email\": \"suresh.patel@example.com\",\n  \"password\": \"Citizen@12345\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["register"]
+            },
+            "description": "Registers a new citizen with default role 'citizen'."
+          }
+        },
+        {
+          "name": "POST /login (Citizen Login)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.token) {",
+                  "    pm.environment.set('citizenToken', jsonData.token);",
+                  "    pm.environment.set('citizenId', jsonData.user.userId);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"priya.sharma@example.com\",\n  \"password\": \"Citizen@12345\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["login"]
+            },
+            "description": "Authenticates a citizen and saves the JWT token into {{citizenToken}}."
+          }
+        },
+        {
+          "name": "POST /login (Admin Login)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.token) {",
+                  "    pm.environment.set('adminToken', jsonData.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@govportal.in\",\n  \"password\": \"Admin@12345\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["login"]
+            },
+            "description": "Authenticates the administrator and saves the JWT token into {{adminToken}}."
+          }
+        },
+        {
+          "name": "GET /profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{citizenToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["profile"]
+            },
+            "description": "Fetches profile details of authenticated user."
+          }
+        },
+        {
+          "name": "PUT /profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{citizenToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Priya Sharma Updated\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["profile"]
+            },
+            "description": "Updates profile details of authenticated citizen."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Government Schemes",
+      "item": [
+        {
+          "name": "GET /schemes (All Schemes)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/schemes",
+              "host": ["{{baseUrl}}"],
+              "path": ["schemes"]
+            },
+            "description": "Public endpoint to retrieve all government schemes."
+          }
+        },
+        {
+          "name": "GET /schemes (Filter Category & Status)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/schemes?category=Students&status=Active",
+              "host": ["{{baseUrl}}"],
+              "path": ["schemes"],
+              "query": [
+                { "key": "category", "value": "Students" },
+                { "key": "status", "value": "Active" }
+              ]
+            },
+            "description": "Filter schemes by category and active status."
+          }
+        },
+        {
+          "name": "GET /schemes/:id (Scheme Details)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/schemes/SCH-101",
+              "host": ["{{baseUrl}}"],
+              "path": ["schemes", "SCH-101"]
+            },
+            "description": "Public endpoint to view single scheme details."
+          }
+        },
+        {
+          "name": "POST /schemes (Create Scheme - Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schemeId\": \"SCH-201\",\n  \"schemeName\": \"Green Energy Rural Subsidy\",\n  \"schemeCategory\": \"Farmers\",\n  \"eligibility\": \"Rural households installing rooftop solar units under 5kW.\",\n  \"benefitAmount\": \"₹40,000 direct subsidy\",\n  \"lastDate\": \"2026-12-31\",\n  \"schemeStatus\": \"Active\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/schemes",
+              "host": ["{{baseUrl}}"],
+              "path": ["schemes"]
+            },
+            "description": "Admin endpoint to create a new government welfare scheme."
+          }
+        },
+        {
+          "name": "PUT /schemes/:id (Update Scheme - Admin)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"benefitAmount\": \"₹45,000 direct subsidy\",\n  \"schemeStatus\": \"Active\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/schemes/SCH-201",
+              "host": ["{{baseUrl}}"],
+              "path": ["schemes", "SCH-201"]
+            },
+            "description": "Admin endpoint to update scheme details."
+          }
+        },
+        {
+          "name": "DELETE /schemes/:id (Delete Scheme - Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/schemes/SCH-201",
+              "host": ["{{baseUrl}}"],
+              "path": ["schemes", "SCH-201"]
+            },
+            "description": "Admin endpoint to delete a scheme."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Applications",
+      "item": [
+        {
+          "name": "POST /applyScheme (Citizen Application)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.application && jsonData.application.applicationId) {",
+                  "    pm.environment.set('applicationId', jsonData.application.applicationId);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{citizenToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schemeId\": \"SCH-106\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/applyScheme",
+              "host": ["{{baseUrl}}"],
+              "path": ["applyScheme"]
+            },
+            "description": "Citizen submits an application for a scheme."
+          }
+        },
+        {
+          "name": "GET /applications (Citizen / Admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/applications",
+              "host": ["{{baseUrl}}"],
+              "path": ["applications"]
+            },
+            "description": "Retrieves applications. Citizen sees their own; Admin sees all."
+          }
+        },
+        {
+          "name": "PUT /applications/:id (Admin Status Update)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applicationStatus\": \"Approved\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/applications/APP-2024-002",
+              "host": ["{{baseUrl}}"],
+              "path": ["applications", "APP-2024-002"]
+            },
+            "description": "Admin approves or rejects an application."
+          }
+        },
+        {
+          "name": "DELETE /cancelApplication/:id (Citizen Cancel)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{citizenToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cancelApplication/{{applicationId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["cancelApplication", "{{applicationId}}"]
+            },
+            "description": "Citizen cancels their own pending application."
+          }
+        },
+        {
+          "name": "GET /beneficiaries (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/beneficiaries",
+              "host": ["{{baseUrl}}"],
+              "path": ["beneficiaries"]
+            },
+            "description": "Admin retrieves all approved beneficiary records."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reports & Statistics",
+      "item": [
+        {
+          "name": "GET /stats/public",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/stats/public",
+              "host": ["{{baseUrl}}"],
+              "path": ["stats", "public"]
+            },
+            "description": "Public landing page metric counters."
+          }
+        },
+        {
+          "name": "GET /reports/summary (Admin Analytics)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reports/summary",
+              "host": ["{{baseUrl}}"],
+              "path": ["reports", "summary"]
+            },
+            "description": "MongoDB aggregation-based report summary for administration."
+          }
+        }
+      ]
+    }
+  ]
+}
