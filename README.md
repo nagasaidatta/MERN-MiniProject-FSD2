@@ -24,7 +24,6 @@ A production-quality digital public-service portal where citizens can discover e
 
 ## 🛠️ 2. Technology Stack
 
-Built strictly adhering to the specified MERN stack guidelines:
 
 - **Frontend**: ReactJS (JSX, standard hooks `useState`, `useEffect`), React Router DOM (v6), custom CSS variables design system. *(Zero external CSS frameworks such as Tailwind, Bootstrap, or MUI).*
 - **Backend**: Node.js & Express.js RESTful API, Express Router, JWT authentication, `bcryptjs` password hashing, CORS, and centralized error handling.
